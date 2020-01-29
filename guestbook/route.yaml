@@ -1,16 +1,14 @@
 apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
-  name: grafana
+  labels:
+    app.kubernetes.io/instance: grafana
+  name: grafana-service
+  namespace: spa
 spec:
-  host: argocd-argocd.172.18.33.206.nip.io
-  port:
-    targetPort: https
-  tls:
-    insecureEdgeTerminationPolicy: Redirect
-    termination: passthrough
+  host: grafana-service-spa.172.18.33.206.nip.io
   to:
     kind: Service
-    name: grafana
+    name: grafana-service
     weight: 100
   wildcardPolicy: None
